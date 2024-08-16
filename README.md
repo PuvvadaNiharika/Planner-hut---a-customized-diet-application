@@ -128,8 +128,70 @@ To customize the styles:
 3. **Components**: Modify individual component files in the `components/` directory to update specific UI elements.
 4. **Layout**: Update the layout files in the `layout/` directory to change the overall structure of the website.
 
+# Planner Hut Website - Custom SCSS Styles
 
+This README provides an overview of the custom SCSS styles used in the Planner Hut website. These styles focus on controlling the background, header, and main content areas, with specific adjustments for preloading and animation effects.
 
+## Table of Contents
+
+- [Introduction](#introduction)
+- [File Structure](#file-structure)
+- [Background Styles](#background-styles)
+- [Header Styles](#header-styles)
+- [Main Content Styles](#main-content-styles)
+- [External Libraries](#external-libraries)
+- [Customization](#customization)
+- [License](#license)
+
+## Introduction
+
+This SCSS file is part of the larger Planner Hut website project. It imports several key libraries and defines specific styles for the background (`#bg`), header (`#header`), and main content area (`#main`). These styles are designed to enhance the user experience by managing element visibility and transitions during page load.
+
+## File Structure
+
+- **libs/vars**: Contains variables used throughout the SCSS files for consistent styling.
+- **libs/functions**: Includes custom SCSS functions for more complex styling logic.
+- **libs/mixins**: Provides reusable mixins for common CSS patterns.
+- **libs/vendor**: Contains vendor-specific prefixes for cross-browser compatibility.
+- **libs/breakpoints**: Defines responsive breakpoints for different screen sizes.
+
+## Background Styles
+
+The `#bg` selector targets the background of the website. The style rule ensures that during the preload state (`body.is-preload`), the background remains transparent:
+
+```scss
+#bg {
+	body.is-preload & {
+		&:before {
+			background-color: transparent;
+		}
+	}
+}
+
+#header {
+	body.is-preload & {
+		> * {
+			opacity: 1;
+		}
+
+		@include vendor('filter', 'none');
+
+		.content {
+			.inner {
+				max-height: none;
+				padding: 3rem 2rem;
+				opacity: 1;
+			}
+		}
+	}
+}
+
+#main {
+	article {
+		opacity: 1;
+		margin: (_size(element-margin) * 2) 0 0 0;
+	}
+}
 
 
 
